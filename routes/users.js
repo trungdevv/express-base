@@ -9,19 +9,8 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   res.send("Get detail user by id:" + req?.params?.id ?? "");
 });
-
-router.post(
-  "/login",
-  body("email").isEmail(),
-  body("password").isLength({ min: 6 }),
-  userController.login
-);
-router.post(
-  "/registor",
-  body("email").isEmail(),
-  body("password").isLength({ min: 6 }),
-  userController.registor
-);
+router.post("/login", userController.login);
+router.post("register", userController.register);
 // if not =>create
 router.patch("/", (req, res) => {
   res.send("Get detail user by id");

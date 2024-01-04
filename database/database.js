@@ -8,7 +8,15 @@ const connect = async () => {
     console.log(error);
   }
 };
-
+mongoose.connection.on('connected', () => {
+  console.log("Mongodb connected!")
+});
+mongoose.connection.on('error', () => {
+  console.log("Mongodb connected error!")
+});
+mongoose.connection.on('disconnected', () => {
+  console.log("Mongodb connected is disconnect!")
+});
 process.on("SIGINT", async () => {
   await mongoose.connection.close();
   process.exit(0);
