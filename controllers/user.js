@@ -15,8 +15,8 @@ const login = async (req, res) => {
   }
   const { email, password } = req.body;
   try {
-   let user =  await userRepository.login({ email, password });
-    res.status(200).json({ message: "Login successful" });
+    let existingUser = await userRepository.login({ email, password });
+    res.status(200).json({ message: "Login successful", data: existingUser });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
