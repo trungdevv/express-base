@@ -20,4 +20,7 @@ router.patch("/", (req, res) => {
 router.put("/", (req, res) => {
   res.send("Get detail user by id");
 });
+
+// fake data user
+router.post("/generated", userController.generated); 
 export default router;

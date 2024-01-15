@@ -8,13 +8,12 @@ const checkToken = (req, res, next) => {
     next();
     return;
   }
-  //get and validate token
 
   try {
-    const token = req.headers?.authorization.split(" ")[1];
+    const token = req.headers?.authorization?.split("Bearer")[1].trim(); 
     const jwtObject = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(jwtObject);
-    const isExpired = Date.now() - jwtObject.exp * 1000;
+
+    const isExpired = Date.now() >= jwtObject.exp * 1000;
     if (isExpired) {
       res.status(403).json({ message: "Token expired" });
     }

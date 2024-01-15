@@ -1,6 +1,6 @@
 import express from "express";
 import helmet from "helmet";
-import { studentRouter, userRouter } from "./routes/index.js";
+import { userRouter } from "./routes/index.js";
 import connect from "./database/database.js";
 import createError from "http-errors";
 import checkToken from "./authentication/auth.js";
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(checkToken)
 // Router
 app.use("/users", userRouter);
-app.use("/students", studentRouter);
+
 
 // 404
 app.use((req, res, next) => {

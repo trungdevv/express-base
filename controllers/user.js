@@ -1,7 +1,5 @@
 import Joi from "joi";
 import { userRepository } from "../repositories/index.js";
-import User from "../models/user.js";
-import bcrypt from "bcrypt";
 // Login
 const loginSchema = Joi.object({
   email: Joi.string().email().required(),
@@ -40,7 +38,13 @@ const register = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-
-  // let newUser = await userRepository.login({ email, password });
 };
-export default { login, register: register };
+const generated = async (req,res) => {
+  try {
+    const result = await userRepository.generated();
+    res.status(200).json({ message: result });
+  } catch (error) {
+    res.status(500).json({message: error.message});
+  }
+};
+export default { login, register, generated };
