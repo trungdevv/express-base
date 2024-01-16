@@ -77,5 +77,32 @@ const generated = async () => {
     password: "Generated success",
   };
 };
-
-export default { login, register, generated };
+const getUsers = async ({ page, size, searchString }) => {
+  try {
+    let filteredUsers = await User.aggregate([
+      { $match: !!searchString ? { email: { searchString } } : {} },
+      { $skip: (parseInt(page) - 1) * parseInt(size) },
+      { $limit: parseInt(size) },
+    ]);
+    return filteredUsers;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+const getUser = async ({ id }) => {
+  try {
+    let user = await User.findById(id).exec();
+    return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+const deleteUser = async ({ id }) => {
+  try {
+    let user = await User.findByIdAndDelete(id).exec();
+    return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+export default { login, register, generated,deleteUser, getUser, getUsers };

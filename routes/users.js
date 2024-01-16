@@ -3,24 +3,22 @@ import { body } from "express-validator";
 import { userController } from "../controllers/index.js";
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Get users");
-});
-router.get("/:id", (req, res) => {
-  res.send("Get detail user by id:" + req?.params?.id ?? "");
-});
+router.get("/", userController.getUsers);
+router.get("/:id", userController.getUser);
 router.post("/login", userController.login);
 router.post("/register", userController.register);
 // if not =>create
 router.patch("/", (req, res) => {
-  res.send("Get detail user by id");
+  res.send("Update or create user");
 });
 
 // update
 router.put("/", (req, res) => {
-  res.send("Get detail user by id");
+  res.send("Update user");
 });
 
 // fake data user
-router.post("/generated", userController.generated); 
+router.post("/generated", userController.generated);
+
+router.delete("/delete/:id", userController.deleteUser);
 export default router;
