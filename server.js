@@ -1,4 +1,4 @@
-import app from "./app.js";
+import app, { server } from "./app.js";
 import cors from "cors";
 
 const port = process.env.PORT || 3000;
@@ -7,6 +7,6 @@ app.use(
     origin: "*",
   })
 );
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+server.listen(port, () => {
+  console.log(`Listening on port ${port}!`);
 });

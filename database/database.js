@@ -15,7 +15,7 @@ mongoose.connection.on('error', () => {
   console.log("Mongodb connected error!")
 });
 mongoose.connection.on('disconnected', () => {
-  console.log("Mongodb connected is disconnect!")
+  console.log("Mongodb is disconnect!")
 });
 process.on("SIGINT", async () => {
   await mongoose.connection.close();
